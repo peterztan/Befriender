@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
@@ -15,40 +16,64 @@
 <body>
 
     <div class="container">
-        <div class="jumbotron jumbotron-fluid">
+        <div class="jumbotron shadow-lg mb-3 p-5">
             <h1 class="text-center"><i class="fa fa-handshake-o bg-" aria-hidden="true"></i> Befriender!</h1>
+            <hr>
+            <div class="text-center mb-3 p-1">
+                Have you ever wondered if there was an easier way to find a friend?
+                <br><br>
+                Are you tired of being lonely?
+                <br><br>
+                Look NO FURTHER!
+                <br><br>
+                Click the button below to answer a few questions, and you shall find your one true soulmate!
+            </div>
 
-            <div class="form"></div>
+            <div class="row justify-content-center">
+                <a href="/survey"><button type="button" class="btn btn-lg btn-outline-dark">
+                        <h4><span class="icon-list"></span> Go to Survey</h4>
+                    </button></a>
+            </div>
+
         </div>
 
         <footer class="footer">
             <div class="container">
-                <p><a href="./survey.html">API Friends Link</a> | <a href="/app/public/home.html"> Home</a>
+                <p><a href="/survey">API Friends Link</a> | <a href="/"> Home</a>
             </div>
         </footer>
 
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
 
 <style>
+    body {
+        background: url(https://media.giphy.com/media/5t27FGATq0aDs9LRwc/giphy.gif), no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+        height: 100%;
+    }
 
-body {
-    background: url(https://media.giphy.com/media/5t27FGATq0aDs9LRwc/giphy.gif), no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-    height: 100%;
-}
+    body,
+    html {
+        height: 100%;
+    }
 
-body, html {
-    height: 100%;
-}
-
-.jumbotron {
-    background: inherit;
-    backdrop-filter: blur(10px);
-}
+    .jumbotron {
+        background: inherit;
+        backdrop-filter: blur(20px);
+    }
 </style>
