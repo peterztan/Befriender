@@ -6,8 +6,8 @@ module.exports = function(app) {
   });
 
   app.post("/api/friends", function(req, res) {
-    if (friends.length < 10) {
-      friends.push(req.body);
+    if (surveyData.length < 10) {
+      surveyData.push(req.body);
       res.json(true);
     } else {
       res.json(false);
@@ -15,7 +15,7 @@ module.exports = function(app) {
   });
 
   app.post("/api/clear", function(req, res) {
-    friends.length = 0;
+    surveyData.length = 0;
 
     res.json({ ok: true });
   });
