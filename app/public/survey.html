@@ -29,16 +29,7 @@
       <div class="input-group mb-3">
         <input type="text" id="photoLink" class="form-control" required>
       </div>
-      <h4 class="mb-3"> or </h4>
-      <div class="input-group mb-5">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-        </div>
-        <div class="custom-file">
-          <input type="file" id="photoFile" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-          <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-        </div>
-      </div>
+
       <hr>
 
       <div class="col mb-3">
@@ -184,6 +175,9 @@
       <!-- Submit Button -->
       <button type="submit" class="btn btn-success btn-lg btn-block mb-5" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>
         Submit</button>
+
+      <hr>
+
       <footer class="footer">
         <div class="container">
           <p><a href="/api/friends">API Friends Link</a> | <a href="/"> Home</a>
@@ -192,6 +186,30 @@
     </div>
 
 
+  </div>
+
+  <!-- Modal -->
+  <div id="results-modal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title"><strong>Best Match</strong></h2>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h2 id="match-name"></h2>
+          <img class="card-img-top" id="match-img" src="" alt="">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -226,19 +244,8 @@
       if (checkForm()) {
         // Organize user's data into an object
         var userData = {
-          name: $("#firstName").val() + $("#lastName").val(),
-          photo: function() {
-            var photoLink = $("#photoLink").val();
-            var photoFile = $("#photoFile").val();
-            switch (photoLink, photoFile) {
-              case "", photoFile:
-                photoFile;
-                break;
-              case photoLink, "":
-                photoLink;
-                break;
-            }
-          },
+          name: $("#firstName").val() + " " + $("#lastName").val(),
+          photo: $("#photoLink").val(),
           scores: [
             $("#q1").val(),
             $("#q2").val(),
@@ -253,17 +260,56 @@
           ]
         };
 
-        // AJAX post the data to the friends API.
-        $.post("/api/friends", userData, function(data) {
+        /* attempt at the matching logic
 
+        var existentData = [];
+
+        $.get("/api/friends", existentData, function(data) {
+          console.log(data);
+        })
+
+        console.log(existentData);
+
+        function getDifference(arr1, arr2) {
+          var difference = [];
+          var zero;
+
+          for (let i = 0; i < arr1.length; i++) {
+            var result = arr1.scores[i] - arr2.scores[2];
+            switch (true) {
+              case result <= 0:
+                function negative() {
+                  zero = 0 - result;
+                  difference.push(zero);
+                };
+                break;
+              case result >= 0:
+                function positive() {
+                  zero = result;
+                  difference.push(zero);
+                };
+                break;
+            }
+          };
+        }
+
+        getDifference(existentData, userData);
+
+        */
+
+        var currentUrl = window.location.origin;
+
+        $.post(currentUrl + "/api/friends", userData);
+
+        $.get(currentUrl + "/api/friends", function(data) {
           // Grab the result from the AJAX post so that the best match's name and photo are displayed.
-          $("#match-name").text(data.name);
-          $("#match-img").attr("src", data.photo);
+          $("#match-name").text(data[0].name);
+          $("#match-img").attr("src", data[0].photo);
 
           // Show the modal with the best match
           $("#results-modal").modal("toggle");
-
         });
+
       } else {
         alert("Please fill out all fields before submitting!");
       }
@@ -290,5 +336,25 @@
   .jumbotron {
     background: inherit;
     backdrop-filter: blur(20px);
+  }
+
+  a:link {
+    color: blue;
+  }
+
+  a:hover {
+    color: hotpink;
+  }
+
+  a:active {
+    color: green;
+  }
+
+  a:visited {
+    color: skyblue;
+  }
+
+  p {
+    color: skyblue;
   }
 </style>
